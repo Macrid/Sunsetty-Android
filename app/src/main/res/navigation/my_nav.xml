@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/my_nav"
+    app:startDestination="@id/beforeStartFragment">
+    <fragment
+        android:id="@+id/beforeStartFragment"
+        android:name="com.example.sunsettyandroid.BeforeStartFragment"
+        android:label="fragment_before_start"
+        tools:layout="@layout/fragment_before_start" >
+        <action
+            android:id="@+id/action_beforeStartFragment_to_guessInProgressFragment"
+            app:destination="@id/guessInProgressFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/guessInProgressFragment"
+        android:name="com.example.sunsettyandroid.GuessInProgressFragment"
+        android:label="fragment_guess_in_progress"
+        tools:layout="@layout/fragment_guess_in_progress" >
+        <action
+            android:id="@+id/action_guessInProgressFragment_to_afterGameFragment"
+            app:destination="@id/afterGameFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/afterGameFragment"
+        android:name="com.example.sunsettyandroid.AfterGameFragment"
+        android:label="fragment_after_game"
+        tools:layout="@layout/fragment_after_game" >
+        <action
+            android:id="@+id/action_afterGameFragment_to_guessInProgressFragment"
+            app:destination="@id/guessInProgressFragment" />
+    </fragment>
+</navigation>
