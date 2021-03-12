@@ -2,6 +2,8 @@ package com.example.sunsettyandroid
 
 import android.util.Log
 import com.example.sunsettyandroid.APIs.CityResponse
+import com.example.sunsettyandroid.APIs.SunResponse
+import com.example.sunsettyandroid.APIs.TimezoneResponse
 import com.google.gson.Gson
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
@@ -70,8 +72,9 @@ class ContentViewModel{
 
             val theCity = Gson().fromJson(theResultString, CityResponse::class.java)
 
+
             withContext(Dispatchers.Main) {
-                Log.d("pia9debug", "RESULTAT")
+                Log.d("pia9debug", "CITY RESULTAT")
                 Log.d("pia9debug", theResultString)
             }
 
@@ -79,5 +82,56 @@ class ContentViewModel{
         }
 
 
+    }
+
+    suspend fun getSunriseSunset()
+    {
+        withContext(Dispatchers.IO) {
+            val theurl = URL("https://api.sunrise-sunset.org/json?lat=1&lng=1&date=today")
+
+            val theConnection = (theurl.openConnection() as? HttpURLConnection)!!.apply {
+                requestMethod = "GET"
+                setRequestProperty("Content-Type", "application/json; charset=utf-8")
+                setRequestProperty("Accept", "application/json")
+            }
+
+            val reader = BufferedReader(theConnection.inputStream.reader())
+
+            val theResultString = reader.readText()
+
+            val theCity = Gson().fromJson(theResultString, SunResponse::class.java)
+
+
+            withContext(Dispatchers.Main) {
+                Log.d("pia9debug", "SUN RESULTAT")
+                Log.d("pia9debug", theResultString)
+            }
+        }
+    }
+
+    suspend fun getGMTOffset()
+    {
+        withContext(Dispatchers.IO) {
+            val theurl = URL("http://api.timezonedb.com/v2.1/get-time-zone?key=3WMNYAOTEDF5&format=json&by=position&lat=19&lng=20")
+
+            val theConnection = (theurl.openConnection() as? HttpURLConnection)!!.apply {
+                requestMethod = "GET"
+                setRequestProperty("Content-Type", "application/json; charset=utf-8")
+                setRequestProperty("Accept", "application/json")
+            }
+
+            val reader = BufferedReader(theConnection.inputStream.reader())
+
+            val theResultString = reader.readText()
+
+            val gmtOffsetData = Gson().fromJson(theResultString, TimezoneResponse::class.java)
+
+
+            withContext(Dispatchers.Main) {
+                Log.d("pia9debug", "GMT RESULTAT")
+                Log.d("pia9debug", theResultString)
+                Log.d("debug" , gmtOffsetData.gmtOffset.toString())
+            }
+        }
     }
 }

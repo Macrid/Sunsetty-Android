@@ -36,6 +36,8 @@ class BeforeStartFragment : Fragment() , CoroutineScope by MainScope(){
         val contentViewModel = ContentViewModel()
         launch {
             contentViewModel.getCity()
+            contentViewModel.getSunriseSunset()
+            contentViewModel.getGMTOffset()
         }
 
     }
