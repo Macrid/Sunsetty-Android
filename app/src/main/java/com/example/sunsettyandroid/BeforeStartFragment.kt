@@ -33,12 +33,14 @@ class BeforeStartFragment : Fragment() , CoroutineScope by MainScope(){
             Navigation.findNavController(requireView()).navigate(R.id.action_beforeStartFragment_to_guessInProgressFragment)
         }
 
-        val contentViewModel = ContentViewModel()
-        launch {
+        val contentViewModel = ContentViewModel.shared
+        /*launch {
             contentViewModel.getCity()
-            contentViewModel.getSunriseSunset()
-            contentViewModel.getGMTOffset()
+            //contentViewModel.getSunriseSunset()
+            //contentViewModel.getGMTOffset()
         }
+        
+         */
 
     }
 
