@@ -34,8 +34,11 @@ class ContentViewModel{
     var guessedTimeMinuteOffset:Double? = null
     var currentTime = Date()
 
-    var isSunrise = getRandomBoolean()
+    var isSunrise:Boolean? = null
 
+    init {
+        isSunrise = getRandomBoolean()
+    }
     companion object {
         val shared = ContentViewModel()
     }
@@ -105,7 +108,7 @@ class ContentViewModel{
 
             withContext(Dispatchers.Main) {
               //  Log.d("pia9debug", "SUN RESULTAT")
-               // Log.d("pia9debug", theResultString)
+               Log.d("pia9debug", theResultString)
             }
 
             Log.d("Debug", sunriseUTCTime!!)
@@ -147,8 +150,8 @@ class ContentViewModel{
 
     fun timeConvert24(timeToConvert:String): String
     {
-        val date12Format = SimpleDateFormat("hh:mm:ss a")
-        val date24Format = SimpleDateFormat("HH:mm")
+        val date12Format = SimpleDateFormat("hh:mm:ss a", Locale.US)
+        val date24Format = SimpleDateFormat("HH:mm", Locale.US)
         return date24Format.format(date12Format.parse(timeToConvert))
     }
 

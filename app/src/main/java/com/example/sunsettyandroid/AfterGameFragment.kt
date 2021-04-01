@@ -29,7 +29,7 @@ class AfterGameFragment : Fragment() {
     override fun onStart() {
         super.onStart()
 
-        if(ContentViewModel.shared.isSunrise)
+        if(ContentViewModel.shared.isSunrise!!)
         {
             requireView().findViewById<TextView>(R.id.resultRiseOrSetTV).text = "The sun rises at:"
             requireView().findViewById<TextView>(R.id.correctTimeTV).text = ContentViewModel.shared.sunriselocalTime
@@ -44,6 +44,7 @@ class AfterGameFragment : Fragment() {
         }
 
 
+        requireView().findViewById<TextView>(R.id.afterGameCityTV).text = ContentViewModel.shared.cityName + ", \n" + ContentViewModel.shared.cityCountry
         requireView().findViewById<TextView>(R.id.timeOffTV).text = ContentViewModel.shared.guessedTimeHourOffset!!.toInt().toString() + " hours and " + ContentViewModel.shared.guessedTimeMinuteOffset!!.toInt().toString() + " minutes off"
 
     }
