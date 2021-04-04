@@ -1,5 +1,7 @@
 package com.example.sunsettyandroid
 
+import android.content.Context
+import android.content.SharedPreferences
 import android.util.Log
 import com.example.sunsettyandroid.APIs.CityResponse
 import com.example.sunsettyandroid.APIs.SunResponse
@@ -198,7 +200,7 @@ class ContentViewModel{
          */
     }
 
-    fun compareTime(guessedTime: String)
+    fun compareTime(context: Context, guessedTime: String)
     {
         var calendar = Calendar.getInstance()
 
@@ -229,5 +231,15 @@ class ContentViewModel{
 
         guessedTimeHourOffset = hoursOff
         guessedTimeMinuteOffset = minutesOff
+
+        if (guessedTimeHourOffset == 0.0 && guessedTimeMinuteOffset == 0.0)
+        {
+            val preference = context.getSharedPreferences("score", Context.MODE_PRIVATE)
+            val currentCorrectGuesses = preference.getInt("score", 0)
+            val editor = preference.edit()
+            editor.putInt("score" , currentCorrectGuesses+1)
+            editor.apply()
+            Log.d("debug", preference.getInt("score", 0).toString())
+        }
     }
 }

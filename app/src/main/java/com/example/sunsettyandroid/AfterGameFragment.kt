@@ -43,9 +43,15 @@ class AfterGameFragment : Fragment() {
             Navigation.findNavController(requireView()).navigate(R.id.action_afterGameFragment_to_guessInProgressFragment)
         }
 
-
         requireView().findViewById<TextView>(R.id.afterGameCityTV).text = ContentViewModel.shared.cityName + ", \n" + ContentViewModel.shared.cityCountry
-        requireView().findViewById<TextView>(R.id.timeOffTV).text = ContentViewModel.shared.guessedTimeHourOffset!!.toInt().toString() + " hours and " + ContentViewModel.shared.guessedTimeMinuteOffset!!.toInt().toString() + " minutes off"
+
+        if(ContentViewModel.shared.guessedTimeHourOffset!!.toInt() == 0 && ContentViewModel.shared.guessedTimeMinuteOffset!!.toInt() == 0)
+        {
+            requireView().findViewById<TextView>(R.id.timeOffTV).text = "Exactly right! \nScore +1"
+        }
+        else{
+            requireView().findViewById<TextView>(R.id.timeOffTV).text = ContentViewModel.shared.guessedTimeHourOffset!!.toInt().toString() + " hours and " + ContentViewModel.shared.guessedTimeMinuteOffset!!.toInt().toString() + " minutes off"
+        }
 
     }
 }

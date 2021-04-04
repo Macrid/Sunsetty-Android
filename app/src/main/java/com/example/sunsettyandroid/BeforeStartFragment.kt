@@ -1,11 +1,13 @@
 package com.example.sunsettyandroid
 
+import android.content.Context
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.TextView
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.findNavController
 import kotlinx.coroutines.CoroutineScope
@@ -34,13 +36,7 @@ class BeforeStartFragment : Fragment() , CoroutineScope by MainScope(){
         }
 
         val contentViewModel = ContentViewModel.shared
-        /*launch {
-            contentViewModel.getCity()
-            //contentViewModel.getSunriseSunset()
-            //contentViewModel.getGMTOffset()
-        }
-        
-         */
+        requireView().findViewById<TextView>(R.id.beforeGameScoreTV).text = "Score: " + requireContext().getSharedPreferences("score", Context.MODE_PRIVATE).getInt("score", 0).toString()
 
     }
 

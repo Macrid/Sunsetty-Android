@@ -46,7 +46,8 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
         android:fontFamily="sans-serif-black"
-        android:text="Pick a time"
+        android:text="No time picked"
+        android:textSize="24sp"
         app:layout_constraintBottom_toTopOf="@+id/pickTimeButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
@@ -69,6 +70,7 @@
         android:layout_marginTop="32dp"
         android:fontFamily="sans-serif-black"
         android:gravity="center"
+        android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
